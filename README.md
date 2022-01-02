@@ -1,4 +1,4 @@
-$$
-min_{\mathbf{X}\in \real^{d\times n}} \frac{1}{2}\sum_{}
-$$
+**convex clustering
+
+<img src="https://latex.codecogs.com/svg.image?\left\|&space;x_i-a_i\right\|" title="\left\| x_i-
 
