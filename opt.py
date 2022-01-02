@@ -5,7 +5,14 @@ import time
 
 def accelerated_gradient_method(grad, x0, alpha, tol, display_interval=0):
     '''
-    grad = lambda x: obj.grad(x, a, lamb)
+    Args:
+        grad = lambda x: obj.grad(x, a, lamb)
+        alpha (=1/L): step size
+        x0: initial guess of the optimal solution
+    Output:
+        x: optimal solution (d*n,)
+        ngs: norm of gradients (num_iter+1,)
+        time: time until convergence
     '''
     start_time = time.time()
     num_iter = 0
@@ -31,7 +38,7 @@ def accelerated_gradient_method(grad, x0, alpha, tol, display_interval=0):
     return x, np.array(ngs), time.time() - start_time
 
 
-def conjuate_gradient(grad, hessiant, x, v0, r0, n2r0, tol, max_iter):
+def conjugate_gradient(grad, hessiant, x, v0, r0, n2r0, tol, max_iter):
     '''
     r0 = grad(x_k)
     n2r0: norm2 of r0
@@ -66,12 +73,21 @@ def conjuate_gradient(grad, hessiant, x, v0, r0, n2r0, tol, max_iter):
 
 def newton_cg(f, grad, hessiant, x0, v0, tol, max_iter, cg_max, s, sigma, gamma, display_interval=0):
     '''
-    f = lambda x: obj(x, a, lamb):
-        output scalar
-    grad = lambda x: obj.grad(x, a, lamb):
-        output (n*d,)
-    hessiant = lambda x, t: obj.hessiant(x, t, lamb): hessian evaluated at x dot t:
-        output (n*d,)
+    Args:
+        f = lambda x: obj(x, a, lamb):
+            output scalar
+        grad = lambda x: obj.grad(x, a, lamb):
+            output (n*d,)
+        hessiant = lambda x, t: obj.hessiant(x, t, lamb): hessian evaluated at x dot t:
+            output (n*d,)
+        x0: initial guess of the optimal solution
+        v0 (=0): initial guess of descent direction for conjugate gradient
+        cg_max: max number of iterations for conjugate gradient
+        s, sigma, gamma: backtracking line search parameters
+    Output:
+        x: optimal solution (d*n,)
+        ngs: norm of gradients (num_iter+1,)
+        time: time until convergence
     '''
     start_time = time.time()
     num_iter = 0
@@ -82,9 +98,9 @@ def newton_cg(f, grad, hessiant, x0, v0, tol, max_iter, cg_max, s, sigma, gamma,
     while ng > tol and num_iter < max_iter:
         if display_interval > 0 and num_iter % display_interval == 0:
             print(f"num_iter: {num_iter}, ng: {ng}")
-        d = conjuate_gradient(grad, hessiant, x, v0=0, r0=g,
-                              n2r0=(ng ** 2), tol=min(1, ng**0.1) * ng,
-                              max_iter=cg_max)
+        d = conjugate_gradient(grad, hessiant, x, v0=v0, r0=g,
+                               n2r0=(ng ** 2), tol=min(1, ng**0.1) * ng,
+                               max_iter=cg_max)
         alpha = backtracking(x, f, f(x), g, d, s, sigma, gamma)
         x = x + alpha * d
         g = grad(x)
