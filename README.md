@@ -8,4 +8,7 @@ where
 
 <img src="https://latex.codecogs.com/svg.image?\left\|&space;\mathbf{x_{i}^{*}}&space;-&space;\mathbf{x_{i}^{*}}\right\|&space;<&space;\varepsilon&space;" title="\left\| \mathbf{x_{i}^{*}} - \mathbf{x_{i}^{*}}\right\| < \varepsilon " />
 
-for some predefined hyperparameter <img src="https://latex.codecogs.com/svg.image?\varepsilon&space;" title="\varepsilon " />.
+i.e., different points' centroids are close enough to each other, for some predefined hyperparameter <img src="https://latex.codecogs.com/svg.image?\varepsilon&space;" title="\varepsilon " />.
+* Optimization Algorithm
+- Accelrated Gradient Method
+- Newton-CG
