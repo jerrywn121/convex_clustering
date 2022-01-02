@@ -1,2 +1,2 @@
 # convex_clustering
-$objective$
+$`objective`$
