@@ -1,4 +1,2 @@
 # convex_clustering
-$$
-test
-$$
+$objective$
