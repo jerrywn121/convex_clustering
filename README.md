@@ -16,7 +16,8 @@ We provide implementation of following two optimization algorithm for convex clu
 - Newton-CG
 
 ### Derivation of Gradient and Hessian
-The AGM requires the calculation of the gradient of the objective function, while Newton-CG requires Hessian. The detailed derivation is lengthy and thus only included in 
+The AGM requires the calculation of the gradient of the objective function, while Newton-CG requires Hessian. The detailed mathematical derivation is lengthy and thus only included in **grad_hess_derivation.pdf**. And the Numpy implementation is included in **huber_obj.py**.
 
-###
+### Other Functionalities
+We also write a **cluster** function in the **utils.py** that uses graph and DFS to find clusters
 
